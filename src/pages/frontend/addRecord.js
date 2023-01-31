@@ -33,7 +33,7 @@ const handleSubmit = async(e) =>{
         id: window.getRandomId(),
         dateCreated: serverTimestamp(),
     }
-    console.log(formData)
+    // console.log(formData)
     setIsProcessing(true)
     try {
          await setDoc(doc(firestore, "patientReport", formData.id), formData);

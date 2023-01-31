@@ -1,30 +1,33 @@
 $dark: #001529;
 
-@import "./scss/bootstrap";   
-@import "./scss/libraries";   
+@import "./scss/bootstrap";
+@import "./scss/libraries";
 
-#root{
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  
-  main{
-      flex: 1 0 auto;
+
+  main {
+    flex: 1 0 auto;
   }
 }
-.auth{
+
+.auth {
   // background-color:#001529;
   min-height: 100vh;
   display: flex;
   justify-content: center;
+
   // align-items: center;
-  .card{
+  .card {
     max-width: 1200px;
     margin: 0 auto;
     border: 0;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 }
+
 #components-layout-demo-custom-trigger .trigger {
   padding: 0 24px;
   font-size: 18px;
