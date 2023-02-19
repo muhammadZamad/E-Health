@@ -36,7 +36,7 @@ export default function Record() {
     // return;
     setIsProcessing(true)
     try {
-      const docRef = await updateDoc(doc(firestore, "patientReport", report.id), report);
+      await updateDoc(doc(firestore, "patientReport", report.id), report);
       // console.log("Document written with ID: ", docRef.id); 
       window.toastify("your report has been successfully updated", "success")
       let newDocuments = documents.map((doc) => {
@@ -88,12 +88,15 @@ export default function Record() {
                   <Tr>
                     <Th>S.No</Th>
                     <Th>Patient Name</Th>
-                    <Th>Temp</Th>
-                    <Th>Heart Beat</Th>
-                    <Th>ECG</Th>
-                    <Th>Fall Detect</Th>
-                    <Th>Diabetes</Th>
-                    <Th>Dialysis</Th>
+                    <Th>Tempature (ºF)</Th>
+                    <Th>Heart Beat (bpm)</Th>
+                    <Th>ECG:PR interval(sec)</Th>
+                    <Th>ECG:QRS interval(sec)</Th>
+                    <Th>ECG:QT interval(sec)</Th>
+                    <Th>ECG:ST interval(sec)</Th>
+                    <Th>Blood Sugar (mg/dL)</Th>
+                    <Th>Systolic BP (mm Hg)</Th>
+                    <Th>Diastolic BP (mmHg)</Th>
                     <Th>Date/Time</Th>
                     <Th>Action</Th>
                   </Tr>
@@ -105,10 +108,13 @@ export default function Record() {
                       <Td>{doc.patientName}</Td>
                       <Td>{doc.tempature}</Td>
                       <Td>{doc.heartBeat}</Td>
-                      <Td>{doc.ecg}</Td>
-                      <Td>{doc.fallDetect}</Td>
-                      <Td>{doc.diabetes}</Td>
-                      <Td>{doc.dialysis}</Td>
+                      <Td>{doc.ecgPr}</Td>
+                      <Td>{doc.ecgQrs}</Td>
+                      <Td>{doc.ecgQt}</Td>
+                      <Td>{doc.ecgSt}</Td>
+                      <Td>{doc.bloodSugar}</Td>
+                      <Td>{doc.systolic}</Td>
+                      <Td>{doc.diastolic}</Td>
                       <Td>{dayjs(doc.dateCreated?.seconds * 1000).format("DD-MM-YYYY, hh:mm:ss A")}</Td>
                       <Td>
                         <button className='btn btn-sm btn-info rounded-5' data-bs-toggle="modal" onClick={() => { setReport(doc) }} data-bs-target="#editModal" ><EditOutlined />
@@ -117,7 +123,7 @@ export default function Record() {
                             : <div className='spinner-boder spinner-border-sm'></div>
                           }
                         </button>
-                       
+
                         <button className='btn btn-sm btn-danger rounded-5' disabled={isProcessingDelete} onClick={() => { handleDelete(doc) }}><DeleteOutlined />
                           {!isProcessingDelete
                             ? ""
@@ -151,23 +157,32 @@ export default function Record() {
                 </div>
 
                 <div className="col-12 col-md-6 mb-3">
-                  <input type="number" className='form-control' placeholder='Fall Detect' name='fallDetect' value={report.fallDetect} onChange={handleChange} />
+                  <input type="number" className='form-control' placeholder='Tempature (ºF)' name='tempature' value={report.tempature} onChange={handleChange} />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                  <input type="number" className='form-control' placeholder='Tempature' name='tempature' value={report.tempature} onChange={handleChange} />
+                  <input type="number" className='form-control' placeholder='Heart Beat (bpm)' name='heartBeat' value={report.heartBeat} onChange={handleChange} />
                 </div>
 
                 <div className="col-12 col-md-6 mb-3">
-                  <input type="number" className='form-control' placeholder='ECG ' name='ecg' value={report.ecg} onChange={handleChange} />
+                  <input type="number" className='form-control' placeholder='ECG: PR interval(sec)' name='ecgPr' value={report.ecgPr} onChange={handleChange} />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                  <input type="number" className='form-control' placeholder='Heart Beat' name='heartBeat' value={report.heartBeat} onChange={handleChange} />
+                  <input type="number" className='form-control' placeholder='ECG: QRS interval(sec) ' name='ecgQrs' value={report.ecgQrs} onChange={handleChange} />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                  <input type="number" className='form-control' placeholder='Diabetes' name='diabetes' value={report.diabetes} onChange={handleChange} />
+                  <input type="number" className='form-control' placeholder='ECG: QT interval(sec) ' name='ecgQt' value={report.ecgQt} onChange={handleChange} />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                  <input type="number" className='form-control' placeholder='Dialysis' name='dialysis' value={report.dialysis} onChange={handleChange} />
+                  <input type="number" className='form-control' placeholder='ECG: ST interval(sec) ' name='ecgSt' value={report.ecgSt} onChange={handleChange} />
+                </div>
+                <div className="col-12 col-md-6 mb-3">
+                  <input type="number" className='form-control' placeholder='Blood Sugar (mg/dL)' name='bloodSugar' value={report.bloodSugar} onChange={handleChange} />
+                </div>
+                <div className="col-12 col-md-6 mb-3">
+                  <input type="number" className='form-control' placeholder='Systolic BP (mm Hg)' name='systolic' value={report.systolic} onChange={handleChange} />
+                </div>
+                <div className="col-12  mb-3">
+                  <input type="number" className='form-control' placeholder='Diastolic BP (mmHg)' name='diastolic' value={report.diastolic} onChange={handleChange} />
                 </div>
               </div>
 

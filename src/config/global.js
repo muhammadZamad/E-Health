@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
-window.getRandomId = ()=>Math.random().toString(36).slice(2)
-window.toastify = (msg, type) =>{
+window.getRandomId = () => Math.random().toString(36).slice(2)
+window.toastify = (msg, type) => {
     switch (type) {
         case "success":
             toast.success(msg)
@@ -14,7 +14,7 @@ window.toastify = (msg, type) =>{
         case "warn":
             toast.warn(msg)
             break;
-    
+
         default:
             toast(msg)
             break;

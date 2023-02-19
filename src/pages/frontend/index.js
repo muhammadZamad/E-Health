@@ -5,10 +5,10 @@ import Record from "./Record";
 export default function Index() {
   return (
     <>
-<Routes >
-  <Route path='/' element={<AddRecord />}/>
-  <Route path='record' element={<Record />}/>
-</Routes>
+      <Routes >
+        <Route path='/' element={<AddRecord />} />
+        <Route path='record' element={<Record />} />
+      </Routes>
     </>
   )
 }
